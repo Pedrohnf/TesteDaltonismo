@@ -27,49 +27,11 @@ public class TesteActivity extends AppCompatActivity {
 
         ImageView im = findViewById(R.id.im1);
         Button Cancelar = findViewById(R.id.cancelar);
-
-        Bundle params = getIntent().getExtras();
-         imagem = params.getInt("imagem");
-
-
-        Cancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-
         Button OK = findViewById(R.id.ok);
 
-        OK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                EditText t = findViewById(R.id.texto);
-                String texto = t.getText().toString();
-
-                if(t.equals("")){
-                    Toast.makeText(TesteActivity.this,"Campo vazio" , Toast.LENGTH_SHORT).show();
-
-                }else{
-
-                    Intent intent = new Intent();
-                    Bundle data = new Bundle();
-
-                    data.putString("Campo", String.valueOf(t));
-                    intent.putExtras(data);
-
-                    setResult(imagem,intent);
-                }
-
-
-            }
-        });
-
-
-
-
+        Bundle params = getIntent().getExtras();
+        imagem = params.getInt("imagem");
 
 
 
@@ -86,6 +48,44 @@ public class TesteActivity extends AppCompatActivity {
             im.setImageResource(R.drawable.teste3);
 
         }
+
+
+
+
+        Cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+
+        OK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                EditText t = findViewById(R.id.texto);
+
+                if(t.getText().toString().equals("")){
+
+                    Toast.makeText(TesteActivity.this,"Campo vazio" , Toast.LENGTH_SHORT).show();
+
+                }else{
+
+                    Intent intent = new Intent();
+                    Bundle data = new Bundle();
+
+                    data.putString("resposta",t.getText().toString());
+                    intent.putExtras(data);
+
+                    setResult(imagem,intent);
+                    finish();
+                }
+
+            }
+        });
+
 
 
     }
